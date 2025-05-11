@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Weather Forecast</title>
-    </head>
-    <body>
-        <h1>Body Test</h1>
-    </body>
-</html>
+{% extends "main/layout.html" %}
+
+{% block body %}
+    {% if tmd_api.error %}
+        <p>Error loading data: {{ tmd_api.error }}</p>
+    {% else %}
+        <ul>
+        {% for item in tmd_api.data %}
+            <li>{{ item.name }} - {{ item.value }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
